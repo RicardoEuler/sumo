@@ -1,4 +1,6 @@
 set(utils_vehicle_STAT_SRCS
+   SUMOFareHandler.cpp
+   SUMOFareHandler.h
    SUMORouteHandler.cpp
    SUMORouteHandler.h
    SUMORouteLoader.cpp

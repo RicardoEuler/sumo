@@ -366,7 +366,13 @@ enum SumoXMLTag {
     /// @brief alternative definition for city entrances
     AGEN_TAG_ENTRANCE,
     /// @brief parameters
-    AGEN_TAG_PARAM
+    AGEN_TAG_PARAM,
+    /// @brief a single tariff class
+    SUMO_TAG_FARE,
+    /// @brief condition for a change in tariff
+    SUMO_TAG_CONDITION,
+    /// @brief change description in tariff
+    SUMO_TAG_CHANGE
 };
 
 
@@ -1086,8 +1092,11 @@ enum SumoXMLAttr {
     SUMO_ATTR_RNG_DEVICE,
     SUMO_ATTR_RNG_DEVICE_BT,
     SUMO_ATTR_RNG_DRIVERSTATE,
-    SUMO_ATTR_RNG_DEVICE_TOC
+    SUMO_ATTR_RNG_DEVICE_TOC,
     // @}
+
+    SUMO_ATTR_COMPARATOR,
+    SUMO_ATTR_CONDITIONS
 
 };
 

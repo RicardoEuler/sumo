@@ -210,7 +210,7 @@ StringBijection<int>::Entry SUMOXMLDefinitions::tags[] = {
     { "container",                  SUMO_TAG_CONTAINER },
     { "transport",                  SUMO_TAG_TRANSPORT },
     { "tranship",                   SUMO_TAG_TRANSHIP },
-    //Trajectories
+    // Trajectories
     { "trajectories",               SUMO_TAG_TRAJECTORIES },
     { "timestep",                   SUMO_TAG_TIMESTEP },
     { "timeSlice",                  SUMO_TAG_TIMESLICE },
@@ -236,6 +236,10 @@ StringBijection<int>::Entry SUMOXMLDefinitions::tags[] = {
     { "cityGates",                  AGEN_TAG_CITYGATES },
     { "entrance",                   AGEN_TAG_ENTRANCE },
     { "parameters",                 AGEN_TAG_PARAM },
+    // Fares
+    { "fare",                       SUMO_TAG_FARE },
+    { "condition",                  SUMO_TAG_CONDITION },
+    { "change",                     SUMO_TAG_CHANGE },
     // Other
     { "",                           SUMO_TAG_NOTHING } //< must be the last one
 };
@@ -736,6 +740,10 @@ StringBijection<int>::Entry SUMOXMLDefinitions::attrs[] = {
     { "device.btreceiver", SUMO_ATTR_RNG_DEVICE_BT },
     { "driverState",       SUMO_ATTR_RNG_DRIVERSTATE },
     // @}
+
+    // Fares
+    { "comparator",        SUMO_ATTR_COMPARATOR },
+    { "condition",         SUMO_ATTR_CONDITIONS },
 
     // Other
     { "",                       SUMO_ATTR_NOTHING } //< must be the last one
