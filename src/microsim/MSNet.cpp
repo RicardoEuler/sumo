@@ -92,7 +92,7 @@
 #include <microsim/traffic_lights/MSRailSignal.h>
 #include <microsim/trigger/MSChargingStation.h>
 #include <microsim/trigger/MSOverheadWire.h>
-#include <utils/router/FareModul.h>
+#include <utils/router/FareModule.h>
 
 #include <microsim/transportables/MSTransportableControl.h>
 #include "MSEdgeControl.h"
@@ -1135,7 +1135,7 @@ MSNet::getIntermodalRouter(const int rngIndex, const int routingMode, const MSEd
         }
         const std::string routingAlgorithm = OptionsCont::getOptions().getString("routing-algorithm");
         if (routingMode == libsumo::ROUTING_MODE_COMBINED) {
-            myIntermodalRouter[key] = new MSIntermodalRouter(MSNet::adaptIntermodalRouter, carWalk, routingAlgorithm, routingMode, new FareModul());
+            myIntermodalRouter[key] = new MSIntermodalRouter(MSNet::adaptIntermodalRouter, carWalk, routingAlgorithm, routingMode, new FareModule());
         } else {
             myIntermodalRouter[key] = new MSIntermodalRouter(MSNet::adaptIntermodalRouter, carWalk, routingAlgorithm, routingMode);
         }

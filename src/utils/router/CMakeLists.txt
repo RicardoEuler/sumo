@@ -22,7 +22,7 @@ set(utils_router_STAT_SRCS
    RouterProvider.h
    SUMOAbstractRouter.h
    SPTree.h
-   FareModul.h
+   FareModule.h
    FareToken.h
    FareZones.h)
 

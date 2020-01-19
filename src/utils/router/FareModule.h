@@ -7,14 +7,14 @@
 // http://www.eclipse.org/legal/epl-v20.html
 // SPDX-License-Identifier: EPL-2.0
 /****************************************************************************/
-/// @file    FareModul.h
+/// @file    FareModule.h
 /// @author  Ricardo Euler
+/// @author  Michael Behrisch
 /// @date    Thu, 17 August 2018
 ///
-// Fare Modul for calculating prices during intermodal routing
+// Fare module for calculating prices during intermodal routing
 /****************************************************************************/
-#ifndef SUMO_FAREMODUL_H
-#define SUMO_FAREMODUL_H
+#pragma once
 
 // ===========================================================================
 // included modules
@@ -24,6 +24,8 @@
 #include <cassert>
 #include <string>
 #include <vector>
+#include <sstream>
+#include <utils/common/StringUtils.h>
 #include "EffortCalculator.h"
 #include "FareToken.h"
 #include "FareZones.h"
@@ -84,7 +86,7 @@ private:
  * in IntermodalRouter
  */
 struct FareState {
-    friend class FareModul;
+    friend class FareModule;
 
 public:
 
@@ -135,11 +137,7 @@ private:
 };
 
 
-
 struct Prices {
-
-
-
     /** Prices for zones **/
     std::vector<double> zonePrices = std::vector<double> {1.9, 3.4, 4.9, 6.2, 7.7, 9.2};
     double  halle = 2.3;
@@ -155,15 +153,13 @@ struct Prices {
 
 
 /**
- * The fare modul responsible for calculating prices
+ * The fare module responsible for calculating prices
  */
-class FareModul : public EffortCalculator {
+class FareModule : public EffortCalculator {
 public:
 
     /** Constructor ***/
-    FareModul() :
-        myFareStates()
-    {};
+    FareModule() {};
 
     /**Implementation of EffortCalculator **/
     void init(const std::vector<std::string>& edges) override {
@@ -226,10 +222,7 @@ public:
     /** Implementation of EffortCalculator
      *  _IntermodalEdge should be an Connector Edge  **/
     void setInitialState(const int edge) override {
-//    assert( edge->getLine() == "!connector");
-
         myFareStates[edge] = FareState(FareToken::START);
-
     }
 
 
@@ -329,7 +322,7 @@ private:
 
         //if station has no fare information, just propagate
         if (collectedToken  == FareToken::None) {
-            std::cout << "Progagating fare state for stop w/o a price!" << std::endl;
+            throw ProcessError("Progagating fare state for stop w/o a price!");
             return;
         }
 
@@ -457,9 +450,7 @@ private:
 
                 break;
             default:
-                std::cout << "Reached invalid position in fareToken selection!" << std::endl;
-                assert(false);
-                break;
+                throw ProcessError("Reached invalid position in fareToken selection!");
         }
     }
 
@@ -555,6 +546,3 @@ private:
 
     }
 };
-
-
-#endif //SUMO_FAREMODUL_H
