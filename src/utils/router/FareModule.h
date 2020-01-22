@@ -25,6 +25,8 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <limits>
+#include <memory>
 #include <utils/common/StringUtils.h>
 #include "EffortCalculator.h"
 #include "FareToken.h"
@@ -152,6 +154,15 @@ struct Prices {
 };
 
 
+class FareCondition {
+public:
+
+    /** Constructor ***/
+    FareCondition(const std::string& comparator, const std::string& key, const double value) {};
+
+};
+
+
 /**
  * The fare module responsible for calculating prices
  */
@@ -160,6 +171,12 @@ public:
 
     /** Constructor ***/
     FareModule() {};
+
+    void addTicket(const std::string& id, const double price) {
+    }
+
+    void addChange(const std::string& fromId, const std::string& toId, const std::vector<std::shared_ptr<FareCondition> > conditions) {
+    }
 
     /**Implementation of EffortCalculator **/
     void init(const std::vector<std::string>& edges) override {

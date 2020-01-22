@@ -20,12 +20,7 @@
 // ===========================================================================
 #include <config.h>
 
-#include <utils/common/MsgHandler.h>
-#include <utils/options/OptionsCont.h>
-#include <utils/vehicle/SUMOVTypeParameter.h>
-#include <utils/vehicle/SUMOVehicleParserHelper.h>
-#include <utils/xml/XMLSubSys.h>
-
+#include <utils/router/FareModule.h>
 #include "SUMOFareHandler.h"
 
 
@@ -33,7 +28,8 @@
 // method definitions
 // ===========================================================================
 
-SUMOFareHandler::SUMOFareHandler(const std::string& file) : SUMOSAXHandler(file) {
+SUMOFareHandler::SUMOFareHandler(const std::string& file, FareModule* fareModule)
+ : SUMOSAXHandler(file), myFareModule(fareModule) {
 }
 
 
@@ -58,12 +54,19 @@ SUMOFareHandler::myStartElement(int element, const SUMOSAXAttributes& attrs) {
 
     switch (element) {
         case SUMO_TAG_TICKET:
-            myPrices[attrs.getString(SUMO_ATTR_ID)] = attrs.getFloat(SUMO_ATTR_COST);
+            myFareModule->addTicket(attrs.getString(SUMO_ATTR_ID), attrs.getFloat(SUMO_ATTR_COST));
             break;
         case SUMO_TAG_CONDITION:
+            myConditions[attrs.getString(SUMO_ATTR_ID)] = std::make_shared<FareCondition>(attrs.getString(SUMO_ATTR_COMPARATOR), attrs.getString(SUMO_ATTR_KEY), attrs.getFloat(SUMO_ATTR_VALUE));
             break;
-        case SUMO_TAG_CHANGE:
+        case SUMO_TAG_CHANGE: {
+            std::vector<std::shared_ptr<FareCondition> > conditions;
+            for (const std::string& condID : attrs.getStringVector(SUMO_ATTR_CONDITIONS)) {
+                conditions.push_back(myConditions[condID]);
+            }
+            myFareModule->addChange(attrs.getString(SUMO_ATTR_FROM), attrs.getString(SUMO_ATTR_TO), conditions);
             break;
+        }
     }
 }
 

@@ -20,6 +20,7 @@
 // ===========================================================================
 // included modules
 // ===========================================================================
+#include <memory>
 #include <config.h>
 
 #include <utils/xml/SUMOSAXHandler.h>
@@ -28,8 +29,8 @@
 // ===========================================================================
 // class declarations
 // ===========================================================================
-class MsgHandler;
-class SUMOVTypeParameter;
+class FareModule;
+class FareCondition;
 
 
 // ===========================================================================
@@ -42,7 +43,7 @@ class SUMOVTypeParameter;
 class SUMOFareHandler : public SUMOSAXHandler {
 public:
     /// @brief standard constructor
-    SUMOFareHandler(const std::string& file);
+    SUMOFareHandler(const std::string& file, FareModule* fareModule);
 
     /// @brief standard destructor
     virtual ~SUMOFareHandler();
@@ -63,7 +64,8 @@ protected:
     //@}
 
 private:
-    std::map<std::string, double> myPrices;
+    FareModule* const myFareModule;
+    std::map<std::string, std::shared_ptr<FareCondition> > myConditions;
     
 private:
     /// @brief Invalidated copy constructor

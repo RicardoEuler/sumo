@@ -665,6 +665,8 @@ public:
 
     static void adaptIntermodalRouter(MSIntermodalRouter& router);
 
+    FareModule* getFareModule();
+
 
     /// @brief return whether the network contains internal links
     bool hasInternalLinks() const {

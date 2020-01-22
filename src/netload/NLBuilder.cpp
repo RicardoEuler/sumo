@@ -219,7 +219,7 @@ NLBuilder::build() {
         if (!myOptions.isUsableFileList("fare-file")) {
             return false;
         }
-        SUMOFareHandler handler(f);
+        SUMOFareHandler handler(f, myNet.getFareModule());
         if (!XMLSubSys::runParser(handler, f)) {
             return false;
         }

@@ -1135,7 +1135,7 @@ MSNet::getIntermodalRouter(const int rngIndex, const int routingMode, const MSEd
         }
         const std::string routingAlgorithm = OptionsCont::getOptions().getString("routing-algorithm");
         if (routingMode == libsumo::ROUTING_MODE_COMBINED) {
-            myIntermodalRouter[key] = new MSIntermodalRouter(MSNet::adaptIntermodalRouter, carWalk, routingAlgorithm, routingMode, new FareModule());
+            myIntermodalRouter[key] = new MSIntermodalRouter(MSNet::adaptIntermodalRouter, carWalk, routingAlgorithm, routingMode, myFareModule);
         } else {
             myIntermodalRouter[key] = new MSIntermodalRouter(MSNet::adaptIntermodalRouter, carWalk, routingAlgorithm, routingMode);
         }
@@ -1175,6 +1175,15 @@ MSNet::adaptIntermodalRouter(MSIntermodalRouter& router) {
             }
         }
     }
+}
+
+
+FareModule*
+MSNet::getFareModule() {
+    if (myFareModule == nullptr) {
+        myFareModule = new FareModule();
+    }
+    return myFareModule;
 }
 
 
