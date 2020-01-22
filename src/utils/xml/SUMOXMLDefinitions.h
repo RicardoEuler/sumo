@@ -367,11 +367,11 @@ enum SumoXMLTag {
     AGEN_TAG_ENTRANCE,
     /// @brief parameters
     AGEN_TAG_PARAM,
-    /// @brief a single tariff class
-    SUMO_TAG_FARE,
-    /// @brief condition for a change in tariff
+    /// @brief a single ticket
+    SUMO_TAG_TICKET,
+    /// @brief condition for a change in fares
     SUMO_TAG_CONDITION,
-    /// @brief change description in tariff
+    /// @brief change description in fares
     SUMO_TAG_CHANGE
 };
 

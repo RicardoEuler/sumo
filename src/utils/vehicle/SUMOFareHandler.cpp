@@ -37,23 +37,27 @@ SUMOFareHandler::SUMOFareHandler(const std::string& file) : SUMOSAXHandler(file)
 }
 
 
+SUMOFareHandler::~SUMOFareHandler() {
+}
+
+
 void
 SUMOFareHandler::myStartElement(int element, const SUMOSAXAttributes& attrs) {
 /* preliminary structure of the input file
 <fares>
-    <fare id="" name="" type="" cost=""/>
+    <ticket id="" name="" type="" cost=""/>
     name is the long name, type is the name, cost is the price
 
     <condition id="" comparator="" key="" value=""/> 
     comparator is one of "eq", "ne", "lt", "le", "gt", "ge"
-    key is the attribute name and is one of "distance", "numStops", "numZones", "transfer", "token"
+    key is the attribute name and is one of "distance", "numStops", "numZones", "transfer", "symbol"
 
     <change from="" to="" conditions=""/> 
 </fares>
 */
 
     switch (element) {
-        case SUMO_TAG_FARE:
+        case SUMO_TAG_TICKET:
             myPrices[attrs.getString(SUMO_ATTR_ID)] = attrs.getFloat(SUMO_ATTR_COST);
             break;
         case SUMO_TAG_CONDITION:

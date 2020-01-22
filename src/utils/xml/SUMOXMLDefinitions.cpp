@@ -237,7 +237,7 @@ StringBijection<int>::Entry SUMOXMLDefinitions::tags[] = {
     { "entrance",                   AGEN_TAG_ENTRANCE },
     { "parameters",                 AGEN_TAG_PARAM },
     // Fares
-    { "fare",                       SUMO_TAG_FARE },
+    { "ticket",                     SUMO_TAG_TICKET },
     { "condition",                  SUMO_TAG_CONDITION },
     { "change",                     SUMO_TAG_CHANGE },
     // Other

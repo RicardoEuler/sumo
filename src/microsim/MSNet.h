@@ -80,6 +80,7 @@ class IntermodalRouter;
 template<class E, class L, class N, class V>
 class PedestrianRouter;
 class OptionsCont;
+class FareModule;
 
 
 // ===========================================================================
@@ -866,6 +867,7 @@ protected:
     mutable std::map<int, SUMOAbstractRouter<MSEdge, SUMOVehicle>*> myRouterEffort;
     mutable std::map<int, MSPedestrianRouter*> myPedestrianRouter;
     mutable std::map<int, MSIntermodalRouter*> myIntermodalRouter;
+    FareModule* myFareModule = nullptr;
 
     /// @brief An RTree structure holding lane IDs
     mutable std::pair<bool, NamedRTree> myLanesRTree;

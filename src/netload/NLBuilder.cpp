@@ -40,6 +40,7 @@
 #include <utils/common/ToString.h>
 #include <utils/vehicle/SUMORouteLoaderControl.h>
 #include <utils/vehicle/SUMORouteLoader.h>
+#include <utils/vehicle/SUMOFareHandler.h>
 #include <utils/xml/XMLSubSys.h>
 #ifdef HAVE_FOX
 #include <utils/foxtools/MsgHandlerSynchronized.h>
@@ -210,6 +211,17 @@ NLBuilder::build() {
             if (!XMLSubSys::runParser(handler, *i)) {
                 return false;
             }
+        }
+    }
+    // load fares if wished
+    if (myOptions.isSet("fare-file")) {
+        const std::string& f = myOptions.getString("fare-file");
+        if (!myOptions.isUsableFileList("fare-file")) {
+            return false;
+        }
+        SUMOFareHandler handler(f);
+        if (!XMLSubSys::runParser(handler, f)) {
+            return false;
         }
     }
     // load the previous state if wished

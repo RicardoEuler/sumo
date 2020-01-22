@@ -94,6 +94,9 @@ MSFrame::fillOptions() {
     oc.doRegister("weight-attribute", 'x', new Option_String("traveltime"));
     oc.addSynonyme("weight-attribute", "measure", true);
     oc.addDescription("weight-attribute", "Input", "Name of the xml attribute which gives the edge weight");
+    oc.doRegister("fare-file", new Option_FileName());
+    oc.addSynonyme("fare-file", "fares");
+    oc.addDescription("fare-file", "Input", "Load ticket descriptions for public transport routing from FILE");
 
     oc.doRegister("load-state", new Option_FileName());//!!! check, describe
     oc.addDescription("load-state", "Input", "Loads a network state from FILE");
